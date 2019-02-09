@@ -1,0 +1,167 @@
+{
+  "displayName": "Jenkins",
+  "type": "jenkins",
+  "logo": "jenkins.png",
+  "logoSmall": "jenkins_small.png",
+  "metadata": [
+    {
+      "name": "Workspace",
+      "dependent": false,
+      "values": [
+        {
+          "id": "Hello",
+          "name": "Hello",
+          "isRegex": false
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "id": "title",
+      "name": "title",
+      "datatype": "string"
+    },
+    {
+      "id": "build_tag",
+      "name": "build_tag",
+      "datatype": "string"
+    },
+    {
+      "id": "build_number",
+      "name": "Build Number",
+      "datatype": "string"
+    },
+    {
+      "id": "build_display_name",
+      "name": "Build Display Name",
+      "datatype": "string"
+    },
+    {
+      "id": "job_name",
+      "name": "Job Name",
+      "datatype": "string"
+    },
+    {
+      "id": "job_base_name",
+      "name": "Job Base Name",
+      "datatype": "string"
+    },
+    {
+      "id": "executor_number",
+      "name": "Executor Number",
+      "datatype": "string"
+    },
+    {
+      "id": "node_name",
+      "name": "Node Name",
+      "datatype": "string"
+    },
+    {
+      "id": "node_labels",
+      "name": "Node Labels",
+      "datatype": "string"
+    },
+    {
+      "id": "workspace",
+      "name": "Workspace",
+      "datatype": "string"
+    },
+    {
+      "id": "jenkins_home",
+      "name": "Jenkins Home",
+      "datatype": "string"
+    },
+    {
+      "id": "jenkins_url",
+      "name": "Jenkins URL",
+      "datatype": "string"
+    },
+    {
+      "id": "build_url",
+      "name": "Build URL",
+      "datatype": "string"
+    },
+    {
+      "id": "job_url",
+      "name": "Job URL",
+      "datatype": "string"
+    },
+    {
+      "id": "git_commit",
+      "name": "Git Commit",
+      "datatype": "string"
+    },
+    {
+      "id": "git_previous_commit",
+      "name": "Git Previous Commit",
+      "datatype": "string"
+    },
+    {
+      "id": "git_previous_successful_commit",
+      "name": "Git Previous Successful Commit",
+      "datatype": "string"
+    },
+    {
+      "id": "git_branch",
+      "name": "Git Branch",
+      "datatype": "string"
+    },
+    {
+      "id": "git_local_branch",
+      "name": "Git Local Branch",
+      "datatype": "string"
+    },
+    {
+      "id": "git_url",
+      "name": "Git URL",
+      "datatype": "string"
+    },
+    {
+      "id": "git_committer_name",
+      "name": "Git Committer Name",
+      "datatype": "string"
+    },
+    {
+      "id": "git_author_name",
+      "name": "Git Author Name",
+      "datatype": "string"
+    },
+    {
+      "id": "git_author_email",
+      "name": "Git Author Email",
+      "datatype": "string"
+    },
+    {
+      "id": "git_committer_email",
+      "name": "Git Commiter Email",
+      "datatype": "string"
+    },
+    {
+      "id": "build_id",
+      "name": "Build Id",
+      "datatype": "string"
+    }
+  ],
+  "loginOptions": [],
+  "idFieldName": "build_tag",
+  "titleFieldName": "title",
+  "projectFieldName": "workspace",
+  "artifactFieldName": "issuetype",
+  "testStepsFieldName": "",
+  "changedDateFieldName": "modified",
+  "dateFormat": "dd-MM-yyyy",
+  "dateTimeFormat": "dd-MM-yyyy HH:mm:ss.SSS",
+  "isISO8601DateFormat": "false",
+  "commentFieldName": "got_commit",
+  "commentFieldId": "discussedBy",
+  "attachmentFieldName": "Attachments",
+  "attachmentFieldId": "attachments",
+  "apiVersion": "2",
+  "callBackUrlConfigured": false,
+  "callBackUrls": [],
+  "applicationType": "remote",
+  "urlDescription": "",
+  "userNameDescription": "",
+  "passwordDescription": ""
+}

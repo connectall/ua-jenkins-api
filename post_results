@@ -1,0 +1,21 @@
+set o
+echo on
+json=\
+"{\"appLinkName\":\"apiTest\"," \
+    "\"origin\":\"source\","\
+    "\"fields\":"\
+        "{\"id\":\"$BUILD_NUMBER\","\
+        "\"summary\":\"Build $BUILD_NUMBER completed with status $3\","\
+        "\"status\":\"New\","\
+        "\"priority\":\"major\","\
+        "\"created_by\":\"vijay\","\
+        "\"assigned_to\":\"vijay\","\
+        "\"linked_story_id\":null,"\
+        "\"created_time\":\"07-12-2018 06:34:44\","\
+        "\"modified_time\":\"07-12-2018 06:34:44\""\
+        "}}"
+echo "Send JSON: $json"
+curl \
+--header "Content-Type: application/json;charset=UTF-8" -X POST \
+-d "$json" \
+ http://mule:8090/connectall/api/2/postRecord?apikey=93988411-0b14-4ba8-9d0a-74c169a5bfcf

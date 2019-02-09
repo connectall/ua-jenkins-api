@@ -1,0 +1,15 @@
+{
+  "appLinkName":"apiTest",
+  "origin":"source",
+  "fields":{
+    "id":"df4be4c7-5019-42e4-924e-bdcd5010e14f",
+    "summary":"Hello Build completed",
+    "status":"New",
+    "priority":"major",
+    "created_by":"vijay",
+    "assigned_to":"vijay",
+    "linked_story_id":null,
+    "created_time":"07-12-2018 06:34:44",
+    "modified_time":"07-12-2018 06:34:44"
+  }
+}
