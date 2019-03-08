@@ -1,7 +1,10 @@
 #!/bin/bash
+
+. setup.sh
+
 json="
-{\"appLinkName\":\"jenkinsBuildStatus\",
-    \"origin\":\"source\",
+{\"appLinkName\":\"jenkins\",
+    \"origin\":\"destination\",
     \"fields\":
        {\"id\":\"$BUILD_NUMBER\",
         \"title\":\"Build $BUILD_NUMBER completed with status $3\",
@@ -12,7 +15,6 @@ json="
         \"linked_story_id\":null,
         \"created_time\":\"07-12-2018 06:34:44\",
         \"modified_time\":\"07-12-2018 06:34:44\",
-        \"BUILD_NUMBER\":\"$BUILD_NUMBER\",
         \"BUILD_ID\":\"$BUILD_ID\",
         \"BUILD_DISPLAY_NAME\":\"$BUILD_DISPLAY_NAME\",
         \"JOB_NAME\":\"$JOB_NAME\",
@@ -38,7 +40,8 @@ json="
         \"GIT_AUTHOR_EMAIL\":\"$GIT_AUTHOR_EMAIL\"
         }}"
 echo "Send JSON: $json"
+echo "via ${ConnectAllUrl}/api/2/postRecord?apikey=$ConnectAllApikey"
 curl \
 --header "Content-Type: application/json;charset=UTF-8" -X POST \
 -d "$json" \
- http://connectall:8090/connectall/api/2/postRecord?apikey=c3509457-9b91-4c3f-ad46-68d3e5284adc
+ ${ConnectAllUrl}/connectall/api/2/postRecord?apikey=$ConnectAllApiKey

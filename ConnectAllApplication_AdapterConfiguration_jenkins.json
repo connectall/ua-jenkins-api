@@ -13,6 +13,17 @@
           "name": "Hello",
           "isRegex": false
         }
+        ]
+        },
+        {
+      "name": "issuetype",
+      "dependent": false,
+      "values": [
+        {
+          "id": "Build Results",
+          "name": "Build Results",
+          "isRegex": false
+                }
       ]
     }
   ],
@@ -20,6 +31,11 @@
     {
       "id": "title",
       "name": "title",
+      "datatype": "string"
+    },
+    {
+      "id": "id",
+      "name": "id",
       "datatype": "string"
     },
     {
@@ -144,7 +160,7 @@
     }
   ],
   "loginOptions": [],
-  "idFieldName": "build_tag",
+  "idFieldName": "id",
   "titleFieldName": "title",
   "projectFieldName": "workspace",
   "artifactFieldName": "issuetype",
