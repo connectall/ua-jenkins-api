@@ -1,0 +1,75 @@
+{
+	"displayName": "Jenkins",
+	"type": "jenkins",
+	"logo": "jenkins.png",
+	"logoSmall": "jenkins_small.png",
+	"metadata": [{
+	"name": "project",
+      "dependent": false,
+      "values": [
+        {
+          "id": "Test",
+          "name": "Test",
+          "isRegex": false
+        }]},
+    {
+	"name": "build",
+	"dependent": true,
+	"values": [
+	{
+		"id": "bug",
+		"name": "bug"
+	}]}],
+	"fields": [
+    {
+      "id": "id",
+      "name": "Id",
+      "datatype": "string"
+    },
+    {
+      "id": "summary",
+      "name": "Summary",
+      "datatype": "string"
+    },
+    {
+      "id": "status",
+      "name": "Status",
+      "datatype": "string",
+      "values": [
+        {
+          "id": "1",
+          "name": "TO DO",
+          "isRegex": false
+        },
+        {
+          "id": "2",
+          "name": "Open",
+          "isRegex": false
+        }
+      ]
+    },
+    {
+      "id": "description",
+      "name": "Description",
+      "datatype": "string"
+    }
+],
+	"loginOptions": [],
+	"idFieldName": "id",
+	"titleFieldName": "Summary",
+	"projectFieldName": "project",
+	"artifactFieldName": "issuetype",
+	"testStepsFieldName": "",
+	"changedDateFieldName": "modified",
+	"dateFormat": "dd-MM-yyyy",
+	"dateTimeFormat": "dd-MM-yyyy HH:mm:ss.SSS",
+	"isISO8601DateFormat": "false",
+	"commentFieldName": "Comment",
+	"commentFieldId": "discussedBy",
+	"attachmentFieldName": "Attachments",
+	"attachmentFieldId": "attachments",
+	"apiVersion": "2",
+	"isCallBackUrlConfigured": false,
+	"applicationType": "remote",
+	"callBackUrls": []
+}
