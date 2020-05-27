@@ -1,0 +1,70 @@
+The ConnectALL-Jenkins adapter allows Jenkins to be integrated with other endpoints. It provides two basic 
+features but this is a template for other use cases. The two use cases are build a workspace, and send the 
+results of the build back to the requesting endpoint.
+
+For example, a new 'build-request' ticket could be created in JIRA. The poll.sh script will find the new or 
+updated tickets and will kick off the specified build via a rest call to Jenkins. When the build is complete
+the post_results.sh script will be called as a final step in the build which will send a build-complete
+message back to JIRA.
+
+To implement this bi-directional flow for builds the following components must be setup:
+
+1) A new issue type in JIRA that will request a new build.
+2) An application link in ConnectALL that pipes the JIRA build request to the workspace in Jenkins.
+3) The build in Jenkins that is run, which also sends a build-complete message back to Jira.
+5) An application link in ConnectALL that pipes the build-complete back to a JIRA subtask.
+6) The scripts (setup.sh, poll.sh, and post-results.sh) that does the communication between Jenkins and ConnectALL.
+
+The dependencies for this to work include:
+
+1) The jp program that parses the json
+2) The wget program used to communicate with jenkins to kick off the build
+3) If running on windows the git-bash client to run the scripts.
+
+The required modifications of the .sh scripts include:
+1) Set the following properties in the setup.sh script:
+	a) ConnectAllUrl - the ConnectAll rest api hostname and port. Typically the port is 8090, eg, http://localhost:8090
+	b) JenkinsUrl - the Jenkins rest api hostname and port.
+	c) ConnectAllApiKey - the ConnectAll api key generated in the ConnectAll ui. Setting is per user.
+	d) JenkinsApiKey - the Jenkins api key generated in the Jenkins api.
+2) Change the following values in the poll.sh script:
+	a) The appLinkName to the name of your application link in ConnectAll that sends the build request to Jenkins.
+	b) The credentials for Jenkins on the wget call.
+3) Change the following value in the post-result.sh script:
+	a) The appLinkName to the name of your application link in ConnectAll that sends the build response to the other endpoint.
+
+Note the poll.sh script calls Jenkins to start a paramaterized job. The job name is in the workspace field 
+mapped in the build request application link. In my example I used the JIRA component field to allow the user
+to select the build to run. The paramter to the job is the id of the artifact requesting the job to be run (eg the issuekey in Jira).
+This id is then sent back in the build-complete message so the two issues can be linked.
+
+Application Links:
+
+Two application links must be created in ConnectAll. One to map the build-request from the other endpoint to Jenkins. And another appliction link
+to map the build-complete message from Jenkins to the other endpoint.
+
+An example build-request mapping:
+	Jira				Jenkins
+	-----				-------
+	Component(s)	->	workspace
+	Caused By		->	title
+	issuekey		->	id
+	
+And the build-request mapping:
+	Jenkins				Jira (subtask)
+	-------				----
+	title			->	Summary
+	Build URL		->	Custom field
+	Linked Story Id	->	SubParent Parent Id
+	
+Jenkins Job:
+	The Jenkins job must also be setup to run your build, and then send a message to ConnectAll when the build is complete, eg:
+
+	echo "The test passed for request %artifact_id% "
+	"C:\Program Files\Git\bin\sh" ./post_results.sh %WORKSPACE% %BUILD_TAG% %ERRORLEVEL% Pass %artifact_id% "
+	
+Startup instructions:
+	1) Start up the poll.sh script. There is a forever.sh script that can run the poll every minute.
+	2) Create a build-request in Jira.
+	
+After the build completes it will create a new subtask in Jira. Its parent is the original build-request.

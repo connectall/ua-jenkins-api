@@ -1,20 +1,20 @@
 #!/bin/bash
 
+echo run setup
 . setup.sh
 
 json="
-{\"appLinkName\":\"jenkins\",
-    \"origin\":\"destination\",
+{\"appLinkName\":\"JenkinsBuildResults2Jira\",
     \"fields\":
-       {\"id\":\"$BUILD_NUMBER\",
+       {\"id\":\"$BUILD_TAG\",
         \"title\":\"Build $BUILD_NUMBER completed with status $3\",
         \"status\":\"New\",
         \"priority\":\"major\",
         \"created_by\":\"vijay\",
         \"assigned_to\":\"vijay\",
-        \"linked_story_id\":null,
-        \"created_time\":\"07-12-2018 06:34:44\",
-        \"modified_time\":\"07-12-2018 06:34:44\",
+        \"linked_story_id\":"$5",
+        \"created_time\":\"`date`\",
+        \"modified_time\":\"`date`\",
         \"BUILD_ID\":\"$BUILD_ID\",
         \"BUILD_DISPLAY_NAME\":\"$BUILD_DISPLAY_NAME\",
         \"JOB_NAME\":\"$JOB_NAME\",
@@ -23,8 +23,6 @@ json="
         \"EXECUTOR_NUMBER\":\"$EXECUTOR_NUMBER\",
         \"NODE_NAME\":\"$NODE_NAME\",
         \"NODE_LABELS\":\"$NODE_LABELS\",
-        \"WORKSPACE\":\"$WORKSPACE\",
-        \"JENKINS_HOME\":\"$JENKINS_HOME\",
         \"JENKINS_URL\":\"$JENKINS_URL\",
         \"BUILD_URL\":\"$BUILD_URL\",
         \"JOB_URL\":\"$JOB_URL\",

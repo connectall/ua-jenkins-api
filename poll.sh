@@ -1,12 +1,9 @@
-#!/bin/bash
 
 # Poll for new build requests, and kick off the builds
 # Author: Doug Bass
 # Copyright 2019 ConnectALL LLC
 
 . setup.sh
-
-applink=jenkinsv2
 
 if [ ! -f lasttime ]; then
 	touch lasttime
@@ -17,7 +14,7 @@ lastRun="`date -r lasttime "+%Y-%m-%d %H:%M:%S"`.001"
 echo Last run was $lastRun
 
 json="
-{\"appLinkName\":\"jenkinsv2\",
+{\"appLinkName\":\"JiraRequestBuild2Jenkins\",
  \"origin\":\"source\",
  \"lastModifiedTime\":\"$lastRun\"
 }"
@@ -38,14 +35,39 @@ echo
 
 # Parse out the build to run - currently it only finds one build to Run
 # @todo for loop to parse out all the build requests
-workspace=`cat request.json | sed -e 's/[{}]/''/g' | awk -v RS=',"' -F: '/workspace/ {print $2}' | sed -e 's/\"//g'`
+totalrecords=`jq <request.json .totalrecords`
+i=0
+while [ $i -lt $totalrecords ]
+do
+
+
+#workspace=`cat request.json | sed -e 's/[{}]/''/g' | awk -v RS=',"' -F: '/workspace/ {print $2}' | sed -e 's/\"//g'`
+workspace=`jq <request.json .data[$i].fields.workspace | sed -e 's/\"//g'`
 echo
-echo Result is $workspace
+echo Workspace is $workspace
+
+#artifact_id=`cat request.json |  sed -e 's/[{}]/''/g' | awk -v RS='[[]"' -F: '/id/ {print $2}' | sed -e 's/\"//g' | sed -e 's/,fields//g'`
+artifact_id=`jq <request.json .data[$i].id | sed -e 's/\"//g'`
+
+issuetype=`jq <request.json .data[$i].issuetype | sed -e 's/\"//g'`
+
+title=`jq <request.json .data[$i].title | sed -e 's/\"//g'`
+
+
+echo
+echo id is $artifact_id
 
 # Send the build request to jenkins
 if [ "$workspace" = "" ]; then
 	echo "Nothing to build"
 else
-	wget --auth-no-challenge --http-user=admin --http-password=welcome --secure-protocol=TLSv1 \
-		${JenkinsUrl}/job/${workspace}/build?token=$JenkinsApiKey
+	wget --auth-no-challenge --http-user=dbass --http-password=g2gp4wd --secure-protocol=TLSv1 \
+		${JenkinsUrl}/job/${workspace}/buildWithParameters?token=$JenkinsApiKey\&artifact_id=$artifact_id
 fi
+
+
+i=$(( $i + 1 ))
+
+echo processed record number $i
+
+done

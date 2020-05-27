@@ -1,4 +1,4 @@
-ConnectAllUrl=http://ca-1-node-393_ca_1:8090
-JenkinsUrl=http://localhost:8080
-ConnectAllApiKey=62dc142c-3f33-4b95-9713-7ad4c7af9107
-JenkinsApiKey=build_from_connectall
+ConnectAllUrl=http://localhost:8090
+JenkinsUrl=http://localhost:8086
+ConnectAllApiKey=0c2f0908-b03b-4512-a551-5aed48e86a85
+JenkinsApiKey=11125f97b051c6b8e0fc5651366cb67156

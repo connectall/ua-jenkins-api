@@ -1,0 +1,2 @@
+echo "The test passed for request %artifact_id% "
+"C:\Program Files\Git\bin\sh" ./post_results.sh %WORKSPACE% %BUILD_TAG% Pass Pass %artifact_id% "
