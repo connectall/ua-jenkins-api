@@ -1,5 +1,5 @@
 while [ 1==1 ]
 do
-	./poll.sh
+	./poll_ado.sh Ado2Jenkins
 	sleep 60
 done
